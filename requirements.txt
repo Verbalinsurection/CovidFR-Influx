@@ -1,0 +1,2 @@
+schedule==0.6.0
+influxdb==5.3.0
