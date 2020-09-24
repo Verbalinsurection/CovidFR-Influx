@@ -42,6 +42,12 @@
     },
     {
       "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "table",
       "name": "Table",
       "version": ""
@@ -66,7 +72,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1600921862149,
+  "iteration": 1600932239040,
   "links": [],
   "panels": [
     {
@@ -88,7 +94,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 5,
         "x": 0,
         "y": 0
@@ -182,7 +188,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 5,
         "x": 5,
         "y": 0
@@ -276,7 +282,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 5,
         "x": 10,
         "y": 0
@@ -353,9 +359,84 @@
     },
     {
       "datasource": "${DS_COVIDFR}",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "hide": false,
+          "measurement": "Covid_France",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT sum(last), time FROM (SELECT last(\"dc\") FROM \"Covid_France\" GROUP BY \"dep\")",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "dc"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_COVIDFR}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
           "mappings": [],
           "max": 35000,
           "min": 0,
@@ -381,105 +462,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 3,
         "x": 15,
-        "y": 0
+        "y": 3
       },
-      "id": 9,
+      "id": 21,
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "dep"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Covid_France",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT sum(last) FROM (SELECT last(\"hosp\") FROM \"Covid_France\" GROUP BY \"dep\")",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "hosp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Global hospitalisations",
-      "type": "gauge"
-    },
-    {
-      "datasource": "${DS_COVIDFR}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "max": 10000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 2500
-              },
-              {
-                "color": "red",
-                "value": 5000
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 18,
-        "y": 0
-      },
-      "id": 10,
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "last"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -503,183 +495,6 @@
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT sum(last) FROM (SELECT last(\"rea\") FROM \"Covid_France\" GROUP BY \"dep\")",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "hosp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Global réanimations",
-      "type": "gauge"
-    },
-    {
-      "datasource": "${DS_COVIDFR}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "max": 50000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 25000
-              },
-              {
-                "color": "red",
-                "value": 40000
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 21,
-        "y": 0
-      },
-      "id": 11,
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "dep"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Covid_France",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT sum(last) FROM (SELECT last(\"dc\") FROM \"Covid_France\" GROUP BY \"dep\")",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "hosp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Global décès",
-      "type": "gauge"
-    },
-    {
-      "datasource": "${DS_COVIDFR}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "max": 35000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 7500
-              },
-              {
-                "color": "red",
-                "value": 15000
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 15,
-        "y": 5
-      },
-      "id": 12,
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "dep"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Covid_France",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT sum(last) FROM (SELECT last(\"hosp\") FROM \"Covid_France\" WHERE \"dep\" =~ /^$dep$/ GROUP BY \"dep\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -709,6 +524,20 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Hospitalisations",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
       "type": "gauge"
     },
     {
@@ -716,7 +545,10 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
           "mappings": [],
           "max": 10000,
           "min": 0,
@@ -742,16 +574,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 3,
         "x": 18,
-        "y": 5
+        "y": 3
       },
-      "id": 13,
+      "id": 19,
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -804,6 +636,20 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Réanimations",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
       "type": "gauge"
     },
     {
@@ -811,7 +657,10 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
           "mappings": [],
           "max": 50000,
           "min": 0,
@@ -837,16 +686,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 3,
         "x": 21,
-        "y": 5
+        "y": 3
       },
-      "id": 14,
+      "id": 20,
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -869,7 +718,7 @@
           "measurement": "Covid_France",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(last) FROM (SELECT last(\"dc\") FROM \"Covid_France\" GROUP BY \"dep\")",
+          "query": "SELECT sum(last) FROM (SELECT last(\"rea\") FROM \"Covid_France\" GROUP BY \"dep\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -899,6 +748,20 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Décès",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
       "type": "gauge"
     },
     {
@@ -961,7 +824,7 @@
         "h": 15,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 9
       },
       "id": 16,
       "maxDataPoints": 1,
@@ -1086,7 +949,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 6,
@@ -1306,7 +1169,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 7,
@@ -1533,7 +1396,7 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": "",
         "current": {},
         "datasource": "${DS_COVIDFR}",
         "definition": "SHOW TAG VALUES ON \"covidfr\" WITH KEY = \"dep\"",
@@ -1577,5 +1440,5 @@
   "timezone": "",
   "title": "Covid France",
   "uid": "T68bNrOMk",
-  "version": 18
+  "version": 21
 }
