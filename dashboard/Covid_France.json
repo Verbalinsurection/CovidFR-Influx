@@ -72,9 +72,80 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1600932239040,
+  "iteration": 1601420691705,
   "links": [],
   "panels": [
+    {
+      "datasource": "${DS_COVIDFR}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "hide": false,
+          "measurement": "Covid_France",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT sum(last), time FROM (SELECT last(\"dc\") FROM \"Covid_France\" GROUP BY \"dep\")",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "dc"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
     {
       "circleMaxSize": 30,
       "circleMinSize": 2,
@@ -96,7 +167,7 @@
       "gridPos": {
         "h": 9,
         "w": 5,
-        "x": 0,
+        "x": 9,
         "y": 0
       },
       "hideEmpty": false,
@@ -190,7 +261,7 @@
       "gridPos": {
         "h": 9,
         "w": 5,
-        "x": 5,
+        "x": 14,
         "y": 0
       },
       "hideEmpty": false,
@@ -284,7 +355,7 @@
       "gridPos": {
         "h": 9,
         "w": 5,
-        "x": 10,
+        "x": 19,
         "y": 0
       },
       "hideEmpty": false,
@@ -362,77 +433,6 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 9,
-        "x": 15,
-        "y": 0
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^Time$/",
-          "values": false
-        },
-        "textMode": "value"
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "groupBy": [],
-          "hide": false,
-          "measurement": "Covid_France",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT sum(last), time FROM (SELECT last(\"dc\") FROM \"Covid_France\" GROUP BY \"dep\")",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "dc"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": "${DS_COVIDFR}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
           "custom": {
             "align": null,
             "filterable": false
@@ -464,7 +464,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 15,
+        "x": 0,
         "y": 3
       },
       "id": 21,
@@ -576,7 +576,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 18,
+        "x": 3,
         "y": 3
       },
       "id": 19,
@@ -688,7 +688,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 21,
+        "x": 6,
         "y": 3
       },
       "id": 20,
@@ -817,12 +817,24 @@
                 "value": "gradient-gauge"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Département"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 15,
-        "w": 12,
+        "w": 10,
         "x": 0,
         "y": 9
       },
@@ -946,9 +958,9 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
+        "h": 15,
+        "w": 7,
+        "x": 10,
         "y": 9
       },
       "hiddenSeries": false,
@@ -1166,10 +1178,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 17
+        "h": 15,
+        "w": 7,
+        "x": 17,
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 7,
@@ -1440,5 +1452,5 @@
   "timezone": "",
   "title": "Covid France",
   "uid": "T68bNrOMk",
-  "version": 21
+  "version": 23
 }
