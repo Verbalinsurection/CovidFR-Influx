@@ -333,7 +333,7 @@ def load_csv(file_path, point_hour, measurement, limit=None):
     count = 0
     reader = csv.DictReader(inputfile, delimiter=';')
     for row in reader:
-        if row['sexe'] == '0' and row['dep'] != '':
+        if row['sexe'] == '0' and row['dep'] != '' and row['dep'] != 'NA':
             dt_src = datetime.strptime(
                 row['jour'] + ' ' + point_hour,
                 '%d/%m/%Y %H:%M:%S' if '/' in row['jour']
