@@ -1,2 +1,2 @@
-schedule==0.6.0
+schedule==1.0.0
 influxdb==5.3.1
