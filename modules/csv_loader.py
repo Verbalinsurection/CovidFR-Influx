@@ -345,7 +345,10 @@ def load_csv(file_path, point_hour, measurement, limit=None):
             row_dict = {
                 key: value for (key, value) in row.items() if key in TAGS}
             for val in row_dict:
-                fields[val] = int(row[val])
+                try:
+                    fields[val] = int(row[val])
+                except ValueError:
+                    fields[val] = 0
 
             data_points.append({
                 'measurement': measurement,
