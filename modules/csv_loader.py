@@ -350,17 +350,18 @@ def load_csv(file_path, point_hour, measurement, limit=None):
                 except ValueError:
                     fields[val] = 0
 
-            data_points.append({
-                'measurement': measurement,
-                'time': dt_loc,
-                'fields': fields,
-                'tags': {
-                    'code': row['dep'],
-                    'dep': NAME_DEP[row['dep']],
-                    'latitude': LAT_DEP[row['dep']],
-                    'longitude': LON_DEP[row['dep']]
-                }
-            })
+            if row['dep'] in NAME_DEP:
+                data_points.append({
+                    'measurement': measurement,
+                    'time': dt_loc,
+                    'fields': fields,
+                    'tags': {
+                        'code': row['dep'],
+                        'dep': NAME_DEP[row['dep']],
+                        'latitude': LAT_DEP[row['dep']],
+                        'longitude': LON_DEP[row['dep']]
+                    }
+                })
 
         count += 1
         if limit is not None and count > limit:
