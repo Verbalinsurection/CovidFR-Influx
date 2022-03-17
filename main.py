@@ -72,7 +72,7 @@ def get_remote_filename(url):
 
 def have_new_data(remote_filename, last_record):
     """Return True if new data on remote."""
-    regex = r'(?s)(?<=covid19-).*?(?=-..h)'
+    regex = r'(?s)(?<=covid-hospit-).*?(?=-..h)'
     result = re.search(regex, remote_filename)
     if result is None:
         return False
